@@ -1,5 +1,7 @@
 package edu.csc413.tankgame.view;
 
+import edu.csc413.tankgame.GameDriver;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +36,7 @@ public class StartMenuView extends JPanel {
     // You'll need to provide a way for GameDriver to respond to button presses in this view. Note that below, we add
     // null ActionListeners to the buttons, which don't do anything. How can we change that to be an ActionListener that
     // directs us back to the code in GameDriver?
-    public StartMenuView(String startButtonText) {
+    public StartMenuView(String startButtonText, GameDriver.GameActionListener gameActionListener) {
         URL imageUrl = getClass().getClassLoader().getResource(START_MENU_IMAGE_FILE);
         if (imageUrl == null) {
             throw new RuntimeException("Unable to create an image URL from: " + START_MENU_IMAGE_FILE);
@@ -48,8 +50,10 @@ public class StartMenuView extends JPanel {
         setBackground(Color.BLACK);
         setLayout(null);
 
-        addButton(startButtonText, START_BUTTON_BOUNDS, START_BUTTON_ACTION_COMMAND, null);
-        addButton("Exit", EXIT_BUTTON_BOUNDS, EXIT_BUTTON_ACTION_COMMAND, null);
+        //ActionListener listener = new GameDriver.GameActionListener(); //add listeners to buttons
+        //No need to create new objects here, we are passing them through the constructor's parameters.
+        addButton(startButtonText, START_BUTTON_BOUNDS, START_BUTTON_ACTION_COMMAND, gameActionListener);
+        addButton("Exit", EXIT_BUTTON_BOUNDS, EXIT_BUTTON_ACTION_COMMAND, gameActionListener);
     }
 
     private void addButton(
@@ -67,4 +71,5 @@ public class StartMenuView extends JPanel {
     public void paintComponent(Graphics g) {
         g.drawImage(menuBackground, 0, 0, null);
     }
+
 }

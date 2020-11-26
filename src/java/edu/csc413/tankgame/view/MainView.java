@@ -1,5 +1,8 @@
 package edu.csc413.tankgame.view;
 
+import edu.csc413.tankgame.GameDriver;
+import edu.csc413.tankgame.GameKeyListener;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
@@ -27,32 +30,35 @@ public class MainView {
         }
     }
 
-    private final JFrame mainJFrame;
+    private final JFrame mainJFrame;//ADD listeners to keyboard
     private final JPanel mainPanel;
     private final CardLayout mainPanelLayout;
     private final RunGameView runGameView;
+
 
     // TODO: Finish implementing this.
     // MainView is responsible for assigning listeners to various UI components (like buttons and keyboard input).
     // However, we want to return control to GameDriver when those events happen. How can we have listeners that directs
     // us back to the code in GameDriver?
-    public MainView() {
+    public MainView(GameKeyListener gameKeyListener, GameDriver.GameActionListener gameActionListener) {
         mainJFrame = new JFrame();
         mainJFrame.setVisible(false);
         mainJFrame.setResizable(false);
         mainJFrame.setTitle("Tank Wars");
         mainJFrame.setLocationRelativeTo(null);
         mainJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainJFrame.addKeyListener(null);
+        //KeyListener listener = new GameKeyListener(gameKeyListener);//ADD listeners to keyboard
+        //No need to create new objects here, we are passing them through the constructor's parameters.
+        mainJFrame.addKeyListener(gameKeyListener);
 
         mainPanel = new JPanel();
         mainPanelLayout = new CardLayout();
         mainPanel.setLayout(mainPanelLayout);
 
-        StartMenuView startMenuView = new StartMenuView("Start Game");
+        StartMenuView startMenuView = new StartMenuView("Start Game", gameActionListener);
         mainPanel.add(startMenuView, Screen.START_MENU_SCREEN.getScreenName());
 
-        StartMenuView endMenuView = new StartMenuView("Restart Game");
+        StartMenuView endMenuView = new StartMenuView("Restart Game", gameActionListener);
         mainPanel.add(endMenuView, Screen.END_MENU_SCREEN.getScreenName());
 
         runGameView = new RunGameView();
@@ -60,6 +66,8 @@ public class MainView {
 
         mainJFrame.add(mainPanel);
     }
+
+
 
     /**
      * Returns the contained RunGameView. This method provides the GameDriver with direct access, which is needed for

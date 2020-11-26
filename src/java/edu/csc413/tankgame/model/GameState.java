@@ -2,6 +2,9 @@ package edu.csc413.tankgame.model;
 
 import edu.csc413.tankgame.view.RunGameView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * GameState represents the state of the game "world." The GameState object tracks all of the moving entities like tanks
  * and shells, and provides the controller of the program (i.e. the GameDriver) access to whatever information it needs
@@ -20,9 +23,78 @@ public class GameState {
 
     public static final String PLAYER_TANK_ID = "player-tank";
     public static final String AI_TANK_ID = "ai-tank";
+
+    private boolean isUpPressed;
+    private boolean isDownPressed;
+    private boolean isLeftPressed;
+    private boolean isRightPressed;
+    private boolean isShootPressed;
+
     // TODO: Feel free to add more tank IDs if you want to support multiple AI tanks! Just make sure they're unique.
 
     // TODO: Implement.
     // There's a lot of information the GameState will need to store to provide contextual information. Add whatever
     // instance variables, constructors, and methods are needed.
+
+    private final List<Entity> entities = new ArrayList<>();
+
+    public void addEntity(Entity tank){
+        entities.add(tank);
+    }
+
+    public List<Entity> getEntities(){
+        return entities;
+    }
+
+
+
+    // these XXPressed and XXReleased methods are associated with KeyListeners
+    public void upPressed(){
+        isUpPressed = true;
+    }
+
+    public void upReleased(){
+        isUpPressed = false;
+    }
+
+    public void downPressed(){
+        isDownPressed = true;
+    }
+
+    public void downReleased(){ isDownPressed = false;}
+
+    public void leftPressed(){
+        isLeftPressed = true;
+    }
+
+    public void leftReleased(){ isLeftPressed = false; }
+
+    public void rightPressed(){ isRightPressed = true; }
+
+    public void rightReleased(){
+        isRightPressed = false;
+    }
+
+    public void shootPressed() {isShootPressed = true;}
+
+    public void shootReleased() {isShootPressed = false;}
+
+    //getter methods, so we can make boolean variables private
+    public boolean getIsUpPressed(){
+        return isUpPressed;
+    }
+
+    public boolean getIsDownPressed(){
+        return isDownPressed;
+    }
+
+    public boolean getIsLeftPressed(){
+        return isLeftPressed;
+    }
+
+    public boolean getIsRightPressed(){
+        return isRightPressed;
+    }
+
+    public boolean getIsShootPressed() { return isShootPressed;}
 }
