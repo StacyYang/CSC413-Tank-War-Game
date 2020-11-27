@@ -7,6 +7,8 @@ import edu.csc413.tankgame.view.StartMenuView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * GameDriver is the primary controller class for the tank game. The game is launched from GameDriver.main, and
@@ -90,9 +92,23 @@ public class GameDriver {
     // should be updated accordingly. It should return true as long as the game continues.
     private boolean update() {
         //Ask all tanks, shells, etc. to move
+//        for(Entity entity: gameState.getEntities()){
+//            entity.move(gameState);
+//        }
+        List<Entity> tanks = new ArrayList<>();
         for(Entity entity: gameState.getEntities() ){
-            entity.move(gameState);
+            if (entity instanceof Tank) {
+                tanks.add(entity);
+            }
+            else {
+                entity.move(gameState);
+            }
         }
+
+        for (Entity tank: tanks) {
+            tank.move(gameState);
+        }
+
 
         //Ask all tanks, shells, etc. to check bounds
         for(Entity entity: gameState.getEntities() ){
@@ -102,25 +118,28 @@ public class GameDriver {
         //Ask gameState -- any new shells to draw?
         //if so, call addDrawableEntity
         //TODO: need to update this.....Consult Professor
-        Entity playerTank = null;
-        for(Entity entity: gameState.getEntities()) {
-            if (entity instanceof PlayerTank) {
-                playerTank = entity;
+        List<Entity> newShells = new ArrayList<>();
+        for(Entity entity: gameState.getEntities() ) {
+            if (!runGameView.isRegistered(entity.getId())) {
+                newShells.add(entity);
             }
         }
-        if (gameState.getIsShootPressed() && playerTank != null) {
-            Shell newShell = new Shell(playerTank.getX(), playerTank.getY(), playerTank.getAngle());
-            gameState.addEntity(newShell);
-            runGameView.addDrawableEntity(newShell.getId(), RunGameView.SHELL_IMAGE_FILE, newShell.getX(), newShell.getY(), newShell.getAngle());
+        for(Entity entity: newShells) {
+            runGameView.addDrawableEntity(entity.getId(), RunGameView.SHELL_IMAGE_FILE, entity.getX(), entity.getY(), entity.getAngle());
         }
-//        for(Entity entity: gameState.getEntities()) {
-//            if(gameState.getIsShootPressed()){
-//                entity.shoot(gameState, runGameView);
-//            }
-//        }
 
         //Ask gameState -- any shells to remove?
         //if so, call removeDrawableEntity
+        List<String> removeShellIDs = new ArrayList<>();
+        for(Entity entity: gameState.getEntities()){
+            if (entity instanceof Shell) {
+                removeShellIDs = entity.isAtBorder();
+            }
+        }
+        for(String id: removeShellIDs){
+            runGameView.removeDrawableEntity(id);
+        }
+
 
         //check collisions(part II)
 
@@ -142,7 +161,7 @@ public class GameDriver {
                 mainView.setScreen(MainView.Screen.RUN_GAME_SCREEN);
                 runGame();
             }else if(actionCommand.equals(StartMenuView.EXIT_BUTTON_ACTION_COMMAND)){
-                mainView.setScreen(MainView.Screen.END_MENU_SCREEN);
+                //mainView.setScreen(MainView.Screen.END_MENU_SCREEN);
                 mainView.closeGame();
             }
         }

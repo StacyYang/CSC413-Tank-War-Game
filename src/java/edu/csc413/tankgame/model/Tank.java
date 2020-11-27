@@ -1,8 +1,6 @@
 package edu.csc413.tankgame.model;
 
-import edu.csc413.tankgame.view.RunGameView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +11,6 @@ import java.util.List;
 // between the two classes so that the logic for e.g. moveForward, etc. are not duplicated.
 public abstract class Tank extends Entity{
     private static final double MOVEMENT_SPEED = 2.0;
-    //    private final List<Shell> ammo = new ArrayList<>();
 
     public Tank(String id, double x, double y, double angle){
         super(id, x, y, angle);
@@ -42,13 +39,13 @@ public abstract class Tank extends Entity{
             this.setY(GameState.TANK_Y_UPPER_BOUND);
         }
     }
+    @Override
+    public List<String> isAtBorder(){ return null;}
 
-//    @Override
-//    public void shoot(GameState gameState){
-//        Shell bullet = new Shell(getShellX(), getShellY(), getAngle());
-//        gameState.addEntity(bullet);
-//        //runGameView.addDrawableEntity(this.getId(), RunGameView.SHELL_IMAGE_FILE, getShellX(), getShellY(), getAngle());
-//    }
+    public void shoot(GameState gameState){
+        Shell bullet = new Shell(getShellX(), getShellY(), getAngle());
+        gameState.addEntity(bullet);
+    }
 
 
     // The following methods will be useful for determining where a shell should be spawned when it

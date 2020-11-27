@@ -40,6 +40,10 @@ public class GameKeyListener implements KeyListener{
         if(keyCode == KeyEvent.VK_SPACE){
             gameState.shootPressed();
         }
+
+        if(keyCode == KeyEvent.VK_ESCAPE){
+            gameState.escapePressed();
+        }
     }
 
     @Override
@@ -62,6 +66,10 @@ public class GameKeyListener implements KeyListener{
 
         if(keyCode == KeyEvent.VK_SPACE){
             gameState.shootReleased();
+        }
+
+        if(keyCode == KeyEvent.VK_ESCAPE){
+            gameState.escapeReleased();
         }
     }
 }

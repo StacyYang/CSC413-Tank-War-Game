@@ -1,5 +1,7 @@
 package edu.csc413.tankgame.model;
 
+import com.sun.tools.javac.Main;
+import edu.csc413.tankgame.view.MainView;
 import edu.csc413.tankgame.view.RunGameView;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class GameState {
     private boolean isLeftPressed;
     private boolean isRightPressed;
     private boolean isShootPressed;
+    private boolean isEscapePressed;
 
     // TODO: Feel free to add more tank IDs if you want to support multiple AI tanks! Just make sure they're unique.
 
@@ -52,32 +55,28 @@ public class GameState {
     public void upPressed(){
         isUpPressed = true;
     }
-
     public void upReleased(){
         isUpPressed = false;
     }
 
-    public void downPressed(){
-        isDownPressed = true;
-    }
-
+    public void downPressed(){ isDownPressed = true; }
     public void downReleased(){ isDownPressed = false;}
 
     public void leftPressed(){
         isLeftPressed = true;
     }
-
     public void leftReleased(){ isLeftPressed = false; }
 
     public void rightPressed(){ isRightPressed = true; }
-
     public void rightReleased(){
         isRightPressed = false;
     }
 
     public void shootPressed() {isShootPressed = true;}
-
     public void shootReleased() {isShootPressed = false;}
+
+    public void escapePressed() {isEscapePressed = true;}
+    public void escapeReleased() {isEscapePressed = false;}
 
     //getter methods, so we can make boolean variables private
     public boolean getIsUpPressed(){
@@ -97,4 +96,11 @@ public class GameState {
     }
 
     public boolean getIsShootPressed() { return isShootPressed;}
+
+    public boolean getIsEscapePressed() { return isEscapePressed;}
+
+
+    public void changeToEndMenu(MainView mainView){
+        mainView.setScreen(MainView.Screen.END_MENU_SCREEN);
+    }
 }

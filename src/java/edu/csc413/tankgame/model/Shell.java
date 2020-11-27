@@ -1,6 +1,10 @@
 package edu.csc413.tankgame.model;
 
+import edu.csc413.tankgame.view.MainView;
 import edu.csc413.tankgame.view.RunGameView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Model class representing a shell that has been fired by a tank. A shell has a position and an angle, as well as a
@@ -29,11 +33,9 @@ public class Shell extends Entity{
         moveForward();
     }
 
-//    @Override
-//    public void shoot(GameState gameState){ }
 
     @Override
-    public void checkBorder(){ //TODO: NEED TO CHECK: SHOULD LEAVE THIS EMPTY?
+    public void checkBorder(){ //TODO: NEED TO CHECK
 //        if(this.getX() < GameState.SHELL_X_LOWER_BOUND){
 //            this.setX(GameState.SHELL_X_LOWER_BOUND);
 //        }
@@ -50,6 +52,32 @@ public class Shell extends Entity{
 //            this.setY(GameState.SHELL_Y_UPPER_BOUND);
 //        }
     }
+
+
+
+    private List<String> removeShells = new ArrayList<>();
+    @Override
+    public List<String> isAtBorder(){
+
+        if(this.getX() < GameState.SHELL_X_LOWER_BOUND){
+            removeShells.add(this.getId());
+        }
+
+        if(this.getX() > GameState.SHELL_X_UPPER_BOUND){
+            removeShells.add(this.getId());
+        }
+
+        if(this.getY() < GameState.SHELL_Y_LOWER_BOUND){
+            removeShells.add(this.getId());
+        }
+
+        if(this.getY() > GameState.SHELL_Y_UPPER_BOUND){
+            removeShells.add(this.getId());
+        }
+
+        return removeShells;
+    }
+
 
     private static String getUniqueId() { //because shell generates its own IDs.
         return SHELL_ID_PREFIX + uniqueId++;

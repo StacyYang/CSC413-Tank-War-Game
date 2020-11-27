@@ -1,6 +1,7 @@
 package edu.csc413.tankgame.model;
 
 
+import edu.csc413.tankgame.view.MainView;
 import edu.csc413.tankgame.view.RunGameView;
 
 public class PlayerTank extends Tank{
@@ -11,6 +12,7 @@ public class PlayerTank extends Tank{
     }//constructor
 
     @Override
+    //public void move(GameState gameState, MainView mainView){
     public void move(GameState gameState){
         if(gameState.getIsUpPressed()) {
             moveForward();
@@ -24,13 +26,14 @@ public class PlayerTank extends Tank{
         if(gameState.getIsRightPressed()){
             turnRight();
         }
-
-//        if(gameState.getIsShootPressed()){
-//            shoot(gameState, runGameView);
+        if(gameState.getIsShootPressed()){
+            shoot(gameState);
+        }
+//        if(gameState.getIsEscapePressed()){
+//            gameState.changeToEndMenu(mainView);
 //        }
 
-        if(gameState.getIsShootPressed()){
-           // shoot(gameState);
-        }
+
+
     }
 }

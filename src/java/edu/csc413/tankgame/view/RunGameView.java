@@ -55,6 +55,14 @@ public class RunGameView extends JPanel {
     }
 
     /**
+     * Check whether key exists in hashmap (aka new bullets)
+     */
+    public boolean isRegistered(String id) {
+        return drawableEntitiesById.containsKey(id);
+    }
+
+
+    /**
      * Removes the DrawableEntity identified by the provided ID from this view. This should be invoked if an entity has
      * been removed from the game and should no longer be drawn.
      */

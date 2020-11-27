@@ -1,7 +1,8 @@
 package edu.csc413.tankgame.model;
 
 
-import edu.csc413.tankgame.view.RunGameView;
+
+import java.util.List;
 
 //superclass of tanks and shells
 public abstract class Entity {
@@ -45,9 +46,10 @@ public abstract class Entity {
 
     public abstract double getSpeed(); //Because tank's MOVEMENT_SPEED is different from shell.
 
+    //public abstract void move(GameState gameState ,MainView mainView);
     public abstract void move(GameState gameState);
-
     public abstract void checkBorder();
+    public abstract List<String> isAtBorder();
 
 
 
@@ -75,16 +77,10 @@ public abstract class Entity {
         angle += TANK_TURN_SPEED;
     }
 
-//    public void shoot(GameState gameState, RunGameView runGameView){
-//        Shell bullet = new Shell(getX(), getY(), getAngle());
-//        gameState.addEntity(bullet);
-//        runGameView.addDrawableEntity(this.getId(), RunGameView.SHELL_IMAGE_FILE, getX(), getY(), getAngle());
+//    protected void changeToEndMenu(MainView mainView){
+//        mainView.setScreen(MainView.Screen.END_MENU_SCREEN);
 //    }
 
-//    public void shoot(GameState gameState){
-//        Shell bullet = new Shell(getX(), getY(), getAngle());
-//        gameState.addEntity(bullet);
-//        //runGameView.addDrawableEntity(this.getId(), RunGameView.SHELL_IMAGE_FILE, getX(), getY(), getAngle());
-//    }
+
 
 }
