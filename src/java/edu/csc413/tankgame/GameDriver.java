@@ -117,7 +117,6 @@ public class GameDriver {
 
         //Ask gameState -- any new shells to draw?
         //if so, call addDrawableEntity
-        //TODO: need to update this.....Consult Professor
         List<Entity> newShells = new ArrayList<>();
         for(Entity entity: gameState.getEntities() ) {
             if (!runGameView.isRegistered(entity.getId())) {
@@ -132,20 +131,26 @@ public class GameDriver {
         //if so, call removeDrawableEntity
         List<String> removeShellIDs = new ArrayList<>();
         for(Entity entity: gameState.getEntities()){
-            if (entity instanceof Shell) {
-                removeShellIDs = entity.isAtBorder();
+            if (entity.isAtBorder()) {
+                removeShellIDs.add(entity.getId());
             }
         }
         for(String id: removeShellIDs){
+            gameState.rmEntity(id);
             runGameView.removeDrawableEntity(id);
         }
 
 
         //check collisions(part II)
 
-
         for(Entity entity: gameState.getEntities()){
             runGameView.setDrawableEntityLocationAndAngle(entity.getId(), entity.getX(), entity.getY(), entity.getAngle());
+        }
+
+        //change to END_MENU_SCREEN is Esc is pressed.
+        if(gameState.getIsEscapePressed()){
+            runGameView.reset();
+            mainView.setScreen(MainView.Screen.END_MENU_SCREEN);
         }
 
         return true;
@@ -161,7 +166,6 @@ public class GameDriver {
                 mainView.setScreen(MainView.Screen.RUN_GAME_SCREEN);
                 runGame();
             }else if(actionCommand.equals(StartMenuView.EXIT_BUTTON_ACTION_COMMAND)){
-                //mainView.setScreen(MainView.Screen.END_MENU_SCREEN);
                 mainView.closeGame();
             }
         }

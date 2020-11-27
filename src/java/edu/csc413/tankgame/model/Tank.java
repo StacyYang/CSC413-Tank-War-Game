@@ -1,7 +1,6 @@
 package edu.csc413.tankgame.model;
 
 
-import java.util.List;
 
 /**
  * Model class representing a tank in the game. A tank has a position and an angle. It has a movement speed and a turn
@@ -40,7 +39,7 @@ public abstract class Tank extends Entity{
         }
     }
     @Override
-    public List<String> isAtBorder(){ return null;}
+    public boolean isAtBorder(){ return false;}
 
     public void shoot(GameState gameState){
         Shell bullet = new Shell(getShellX(), getShellY(), getAngle());

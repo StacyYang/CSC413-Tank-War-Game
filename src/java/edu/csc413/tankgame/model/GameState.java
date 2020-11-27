@@ -45,6 +45,10 @@ public class GameState {
         entities.add(tank);
     }
 
+    public void rmEntity(String id) {
+        entities.remove(id);
+    }
+
     public List<Entity> getEntities(){
         return entities;
     }
@@ -95,12 +99,24 @@ public class GameState {
         return isRightPressed;
     }
 
-    public boolean getIsShootPressed() { return isShootPressed;}
-
-    public boolean getIsEscapePressed() { return isEscapePressed;}
-
-
-    public void changeToEndMenu(MainView mainView){
-        mainView.setScreen(MainView.Screen.END_MENU_SCREEN);
+    public boolean getIsShootPressed() {
+        if (isShootPressed) {
+            isShootPressed = false;
+            return true;
+        } else {
+            return false;
+        }
     }
+
+    public boolean getIsEscapePressed() {
+        if (isEscapePressed) {
+            isEscapePressed = false;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
 }

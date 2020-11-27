@@ -1,10 +1,5 @@
 package edu.csc413.tankgame.model;
 
-import edu.csc413.tankgame.view.MainView;
-import edu.csc413.tankgame.view.RunGameView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Model class representing a shell that has been fired by a tank. A shell has a position and an angle, as well as a
@@ -33,49 +28,28 @@ public class Shell extends Entity{
         moveForward();
     }
 
+    @Override
+    public void checkBorder(){}
 
     @Override
-    public void checkBorder(){ //TODO: NEED TO CHECK
-//        if(this.getX() < GameState.SHELL_X_LOWER_BOUND){
-//            this.setX(GameState.SHELL_X_LOWER_BOUND);
-//        }
-//
-//        if(this.getX() > GameState.SHELL_X_UPPER_BOUND){
-//            this.setX(GameState.SHELL_X_UPPER_BOUND);
-//        }
-//
-//        if(this.getY() < GameState.SHELL_Y_LOWER_BOUND){
-//            this.setY(GameState.SHELL_Y_LOWER_BOUND);
-//        }
-//
-//        if(this.getY() > GameState.SHELL_Y_UPPER_BOUND){
-//            this.setY(GameState.SHELL_Y_UPPER_BOUND);
-//        }
-    }
-
-
-
-    private List<String> removeShells = new ArrayList<>();
-    @Override
-    public List<String> isAtBorder(){
-
+    public boolean isAtBorder(){
         if(this.getX() < GameState.SHELL_X_LOWER_BOUND){
-            removeShells.add(this.getId());
+            return true;
         }
 
         if(this.getX() > GameState.SHELL_X_UPPER_BOUND){
-            removeShells.add(this.getId());
+            return true;
         }
 
         if(this.getY() < GameState.SHELL_Y_LOWER_BOUND){
-            removeShells.add(this.getId());
+            return true;
         }
 
         if(this.getY() > GameState.SHELL_Y_UPPER_BOUND){
-            removeShells.add(this.getId());
+            return true;
         }
 
-        return removeShells;
+        return false;
     }
 
 

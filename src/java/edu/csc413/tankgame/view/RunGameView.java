@@ -72,7 +72,9 @@ public class RunGameView extends JPanel {
 
     /** Updates the DrawableEntity with the provided ID to a new location and angle. */
     public void setDrawableEntityLocationAndAngle(String id, double x, double y, double angle) {
-        drawableEntitiesById.get(id).setLocationAndAngle(x, y, angle);
+        if (drawableEntitiesById.containsKey(id)) {
+            drawableEntitiesById.get(id).setLocationAndAngle(x, y, angle);
+        }
     }
 
     @Override

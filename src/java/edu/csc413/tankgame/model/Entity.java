@@ -1,9 +1,6 @@
 package edu.csc413.tankgame.model;
 
 
-
-import java.util.List;
-
 //superclass of tanks and shells
 public abstract class Entity {
     protected static final double TANK_TURN_SPEED = Math.toRadians(3.0);
@@ -49,7 +46,7 @@ public abstract class Entity {
     //public abstract void move(GameState gameState ,MainView mainView);
     public abstract void move(GameState gameState);
     public abstract void checkBorder();
-    public abstract List<String> isAtBorder();
+    public abstract boolean isAtBorder();
 
 
 
@@ -76,11 +73,5 @@ public abstract class Entity {
     protected void turnRight() {
         angle += TANK_TURN_SPEED;
     }
-
-//    protected void changeToEndMenu(MainView mainView){
-//        mainView.setScreen(MainView.Screen.END_MENU_SCREEN);
-//    }
-
-
 
 }
