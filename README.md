@@ -39,10 +39,10 @@ Extra features implemented:
 2. **Better collision detection:** Confine pair combinations to unique ones instead of using brute-force approach.		
 3. **Animations:** Add animations when shell hits a target
 4. **Game UI:**  Tanks' HP and player tank's speed are shown on the bottom of the screen.
-5. **Sound Effects:**  Sound Effects are added to the conditions below:
-            - player tank shoots
-	    - pick up powerup
-	    - tank explosion
-	    - wall explosion
-	    - player wins
-	    - player loses
+5. **Sound Effects:**  Sound Effects are added to the conditions below: <br>
+            - player tank shoots<br>
+	    - pick up powerup<br>
+	    - tank explosion<br>
+	    - wall explosion<br>
+	    - player wins<br>
+	    - player loses<br>
