@@ -34,9 +34,15 @@ For player tank:
 		Esc: Return to game menu.
 
 Extra features implemented:
-1. Power up: Tank can pick up "Power up" and increase its healthPoint by 5, increase its speed to speed x 2.
-2. Better collision detection: 	Confine pair combinations to unique ones instead of using brute-force approach.			
-3. Animations: Add animations when shell hits a target.
-   Game UI: Tanks' HP and player tank's speed are shown on the bottom of the screen.
-   Sound Effects: Sound Effects are added to the conditions below:
-                  player tank shoots, pick up powerup, tank explosion, wall explosion, player wins, player loses.
+
+1. **Power up:** Tank can pick up "Power up" and increase its healthPoint by 5, increase its speed to speed x 2.
+2. **Better collision detection:** Confine pair combinations to unique ones instead of using brute-force approach.		
+3. **Animations:** Add animations when shell hits a target
+4. **Game UI:**  Tanks' HP and player tank's speed are shown on the bottom of the screen.
+5. **Sound Effects:**  Sound Effects are added to the conditions below:
+            - player tank shoots
+	    - pick up powerup
+	    - tank explosion
+	    - wall explosion
+	    - player wins
+	    - player loses
