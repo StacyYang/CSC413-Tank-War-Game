@@ -1,7 +1,5 @@
 package edu.csc413.tankgame.model;
 
-
-
 /**
  * Model class representing a tank in the game. A tank has a position and an angle. It has a movement speed and a turn
  * speed, both represented below as constants.

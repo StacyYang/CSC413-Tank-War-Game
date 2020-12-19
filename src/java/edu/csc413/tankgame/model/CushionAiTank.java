@@ -1,6 +1,5 @@
 package edu.csc413.tankgame.model;
 
-
 public class CushionAiTank extends TurretAiTank{
 
     public CushionAiTank(String id, double x, double y, double angle){
@@ -23,8 +22,6 @@ public class CushionAiTank extends TurretAiTank{
         findTarget(gameState);
 
         Entity playerTank = gameState.getEntity(GameState.PLAYER_TANK_ID);
-        // To figure out what angle the AI tank needs to face, we'll use the change
-        // in the x and y axes between the AI and player tanks.
         double dx = playerTank.getX() - getX();
         double dy = playerTank.getY() - getY();
 

@@ -1,6 +1,5 @@
 package edu.csc413.tankgame.model;
 
-
 import java.util.Random;
 
 public class TurretAiTank extends Tank{

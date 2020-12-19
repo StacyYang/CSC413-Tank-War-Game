@@ -1,6 +1,5 @@
 package edu.csc413.tankgame.view;
 
-import edu.csc413.tankgame.GameDriver;
 import edu.csc413.tankgame.model.Tank;
 
 import javax.swing.*;
