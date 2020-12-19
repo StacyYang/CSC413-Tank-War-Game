@@ -13,13 +13,13 @@ The game supports one player tank and several types of Aitank.
 
 All tank has 7 healthPoint initially, hitting by a shell will decrease it by 1.
 
-Dumb AI Tank: Will always moves in a circle, shoot at random time.
+**Dumb AI Tank:** Will always moves in a circle, shoot at random time.
 
-Turret AI Tank: Will always faces the player tank, shoot at random time.
+**Turret AI Tank:** Will always faces the player tank, shoot at random time.
 
-Cushion AI Tank: Will always faces the player tank, and keep the distance in a range, shoot waits 300 frames.
+**Cushion AI Tank:** Will always faces the player tank, and keep the distance in a range, shoot waits 300 frames.
 
-For player tank: 
+**For player tank:** 
 
 		w: move forward,
                 
