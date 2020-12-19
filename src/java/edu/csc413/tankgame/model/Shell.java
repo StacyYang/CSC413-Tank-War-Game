@@ -13,10 +13,22 @@ public class Shell extends Entity{
     private static final double MOVEMENT_SPEED = 4.0;
 
     private static long uniqueId = 0L;
+    private static String shooterID;
 
-    public Shell(double x, double y, double angle) {
+    public Shell(double x, double y, double angle, String shootID) {
         super(getUniqueId(), x, y, angle);
+        shooterID = shootID;
     }//Constructor
+
+    public String getShooterID(){
+        return shooterID;
+    }
+
+    @Override
+    public double getXBound(){return getX() + 24.0; }
+
+    @Override
+    public double getYBound(){return getY() + 24.0; }
 
     @Override
     public double getSpeed(){
@@ -29,7 +41,7 @@ public class Shell extends Entity{
     }
 
     @Override
-    public void checkBorder(){}
+    public void checkBounds(){} //leave empty
 
     @Override
     public boolean isAtBorder(){

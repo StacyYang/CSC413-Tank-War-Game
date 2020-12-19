@@ -1,11 +1,13 @@
 package edu.csc413.tankgame.model;
 
-import com.sun.tools.javac.Main;
-import edu.csc413.tankgame.view.MainView;
 import edu.csc413.tankgame.view.RunGameView;
 
+import javax.sound.sampled.*;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * GameState represents the state of the game "world." The GameState object tracks all of the moving entities like tanks
@@ -24,7 +26,9 @@ public class GameState {
     public static final double SHELL_Y_UPPER_BOUND = RunGameView.SCREEN_DIMENSIONS.height;
 
     public static final String PLAYER_TANK_ID = "player-tank";
-    public static final String AI_TANK_ID = "ai-tank";
+    public static final String AI_TANK_ID_1 = "ai-tank_1";
+    public static final String AI_TANK_ID_2 = "ai-tank_2";
+    public static final String POWER_UP_ID = "blood";
 
     private boolean isUpPressed;
     private boolean isDownPressed;
@@ -33,25 +37,37 @@ public class GameState {
     private boolean isShootPressed;
     private boolean isEscapePressed;
 
-    // TODO: Feel free to add more tank IDs if you want to support multiple AI tanks! Just make sure they're unique.
 
-    // TODO: Implement.
-    // There's a lot of information the GameState will need to store to provide contextual information. Add whatever
-    // instance variables, constructors, and methods are needed.
+    //Feel free to add more tank IDs if you want to support multiple AI tanks! Just make sure they're unique.
 
     private final List<Entity> entities = new ArrayList<>();
+    private List<Entity> newShells = new ArrayList<>();
 
     public void addEntity(Entity tank){
         entities.add(tank);
     }
+    public void addShell(Entity shell) {newShells.add(shell);}
 
-    public void rmEntity(String id) {
-        entities.remove(id);
+    public void rmEntity(Entity entity) {
+        entities.remove(entity);
+    }
+
+    public void reset() {
+        entities.removeAll(entities);
     }
 
     public List<Entity> getEntities(){
         return entities;
     }
+    public Entity getEntity(String id) {
+        for(Entity entity: entities){
+            if(entity.getId().equals(id)){
+                return entity;
+            }
+        }
+        return null;
+    }
+    public List<Entity> getNewShells() {return newShells;}
 
 
 
@@ -86,15 +102,12 @@ public class GameState {
     public boolean getIsUpPressed(){
         return isUpPressed;
     }
-
     public boolean getIsDownPressed(){
         return isDownPressed;
     }
-
     public boolean getIsLeftPressed(){
         return isLeftPressed;
     }
-
     public boolean getIsRightPressed(){
         return isRightPressed;
     }
@@ -117,6 +130,17 @@ public class GameState {
         }
     }
 
-
+    public void playSound(String soundFileName){
+        try{
+            URL url = this.getClass().getClassLoader().getResource(soundFileName);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.setFramePosition(0);
+            clip.start();
+        }catch(UnsupportedAudioFileException | IOException | LineUnavailableException e){
+            e.printStackTrace();
+        }
+    }
 
 }

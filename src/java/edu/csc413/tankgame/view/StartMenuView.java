@@ -32,7 +32,7 @@ public class StartMenuView extends JPanel {
 
     private final BufferedImage menuBackground;
 
-    // TODO: Implement.
+
     // You'll need to provide a way for GameDriver to respond to button presses in this view. Note that below, we add
     // null ActionListeners to the buttons, which don't do anything. How can we change that to be an ActionListener that
     // directs us back to the code in GameDriver?

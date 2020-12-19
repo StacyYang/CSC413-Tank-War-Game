@@ -20,35 +20,31 @@ public abstract class Entity {
     public String getId() {
         return id;
     }
-
     public double getX() {
         return x;
     }
-
     public double getY() {
         return y;
     }
-
-    public void setX(double newX) {
-        this.x = newX;
-    }
-
-    public void setY(double newY){
-        this.y = newY;
-    }
-
     public double getAngle() {
         return angle;
     }
 
+    public abstract double getXBound(); // = getX() + width
+    public abstract double getYBound(); // = getY() + Height
+
+    public void setX(double newX) {
+        this.x = newX;
+    }
+    public void setY(double newY){
+        this.y = newY;
+    }
+
     public abstract double getSpeed(); //Because tank's MOVEMENT_SPEED is different from shell.
 
-    //public abstract void move(GameState gameState ,MainView mainView);
     public abstract void move(GameState gameState);
-    public abstract void checkBorder();
+    public abstract void checkBounds();
     public abstract boolean isAtBorder();
-
-
 
 
     // TODO: The methods below are provided so you don't have to do the math for movement. However, note that they are
