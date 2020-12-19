@@ -34,7 +34,9 @@ public class CushionAiTank extends TurretAiTank{
         }else if(distance < 200.0){
             moveBackward() ;
         }
+
         shootMode(gameState);
+
     }
 }
 

@@ -5,6 +5,7 @@ import edu.csc413.tankgame.view.MainView;
 import edu.csc413.tankgame.view.RunGameView;
 import edu.csc413.tankgame.view.StartMenuView;
 
+import javax.sound.sampled.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class GameDriver {
     private Tank playerTank;
     private Tank aiTank1;
     private Tank aiTank2;
+    private Clip clip;
+
 
     public GameDriver() {
         gameState = new GameState();
@@ -40,81 +43,81 @@ public class GameDriver {
         mainView.setScreen(MainView.Screen.START_MENU_SCREEN);
     }
 
-     private void runGame() {
-         playerTank = new PlayerTank(
+    private void runGame() {
+        playerTank = new PlayerTank(
                         GameState.PLAYER_TANK_ID,
                         RunGameView.PLAYER_TANK_INITIAL_X,
                         RunGameView.PLAYER_TANK_INITIAL_Y,
                         RunGameView.PLAYER_TANK_INITIAL_ANGLE);
-         playerTankNum++;
+        playerTankNum++;
 
-         aiTank1 = new CushionAiTank(
+        aiTank1 = new CushionAiTank(
                         GameState.AI_TANK_ID_1,
                         RunGameView.AI_TANK_INITIAL_X,
                         RunGameView.AI_TANK_INITIAL_Y,
                         RunGameView.AI_TANK_INITIAL_ANGLE);
-         aiTankNum++;
+        aiTankNum++;
 
-         aiTank2 = new TurretAiTank(
+        aiTank2 = new TurretAiTank(
                          GameState.AI_TANK_ID_2,
                          RunGameView.AI_TANK_2_INITIAL_X,
                          RunGameView.AI_TANK_2_INITIAL_Y,
                          RunGameView.AI_TANK_2_INITIAL_ANGLE);
-         aiTankNum++;
+        aiTankNum++;
 
-         PowerUp powerUp = new PowerUp(
+        PowerUp powerUp = new PowerUp(
                         GameState.POWER_UP_ID,
                         RunGameView.POWER_UP_INITIAL_X,
                         RunGameView.POWER_UP_INITIAL_Y,
                         RunGameView.POWER_UP_INITIAL_ANGLE
                         );
 
-         gameState.addEntity(playerTank);
-         gameState.addEntity(aiTank1);
-         gameState.addEntity(aiTank2);
-         gameState.addEntity(powerUp);
+        gameState.addEntity(playerTank);
+        gameState.addEntity(aiTank1);
+        gameState.addEntity(aiTank2);
+        gameState.addEntity(powerUp);
 
-         runGameView.addDrawableEntity(
+        runGameView.addDrawableEntity(
                 GameState.PLAYER_TANK_ID,
                 RunGameView.PLAYER_TANK_IMAGE_FILE,
                 playerTank.getX(),
                 playerTank.getY(),
                 playerTank.getAngle()
-         );
+        );
 
-         runGameView.addDrawableEntity(
+        runGameView.addDrawableEntity(
                 GameState.AI_TANK_ID_1,
                 RunGameView.AI_TANK_IMAGE_FILE,
                 aiTank1.getX(),
                 aiTank1.getY(),
                 aiTank1.getAngle()
-         );
+        );
 
-         runGameView.addDrawableEntity(
+        runGameView.addDrawableEntity(
                  GameState.AI_TANK_ID_2,
                  RunGameView.AI_TANK_IMAGE_FILE,
                  aiTank2.getX(),
                  aiTank2.getY(),
                  aiTank2.getAngle()
-         );
+        );
 
-         runGameView.addDrawableEntity(
+        runGameView.addDrawableEntity(
                  GameState.POWER_UP_ID,
                  RunGameView.POWER_UP_IMAGE_FILE,
                  powerUp.getX(),
                  powerUp.getY(),
                  powerUp.getAngle()
-         );
+        );
 
-         //Add walls to gameState first, then draw walls on the screen
-         List<WallImageInfo> wallImageInfoList = WallImageInfo.readWalls();
-         for(WallImageInfo wallInfo: wallImageInfoList){
-             Wall newWall = new Wall(wallInfo.getX(), wallInfo.getY(),0);
-             gameState.addEntity(newWall);
-             runGameView.addDrawableEntity(newWall.getId(), wallInfo.getImageFile(), newWall.getX(), newWall.getY(), 0);
-         }
+        //Add walls to gameState first, then draw walls on the screen
+        List<WallImageInfo> wallImageInfoList = WallImageInfo.readWalls();
+        for(WallImageInfo wallInfo: wallImageInfoList){
+            Wall newWall = new Wall(wallInfo.getX(), wallInfo.getY(),0);
+            gameState.addEntity(newWall);
+            runGameView.addDrawableEntity(newWall.getId(), wallInfo.getImageFile(), newWall.getX(), newWall.getY(), 0);
+        }
 
-         Runnable gameRunner = () -> {
+        Runnable gameRunner = () -> {
             while (update()) {
                 runGameView.repaint();
                 try {
@@ -123,9 +126,9 @@ public class GameDriver {
                     throw new RuntimeException(exception);
                 }
             }
-         };
-         new Thread(gameRunner).start();
-
+        };
+        new Thread(gameRunner).start();
+        gameState.playSound("BGM1.wav");
     }
 
     // update should handle one frame of gameplay. All tanks and shells move one step, and all drawn entities
@@ -402,6 +405,8 @@ public class GameDriver {
         playerTankNum = 0;
         aiTankNum = 0;
     }
+
+
 
     public static void main(String[] args) {
         GameDriver gameDriver = new GameDriver();
