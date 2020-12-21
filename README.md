@@ -47,3 +47,5 @@ Extra features implemented:
 	    - player wins<br>
 	    - player loses<br>
 	    - Background Music is added, but still need to work on it. (It only plays once if the game is not over. And it can't stop when game is over if it hasn't finish playing once. )
+
+![game demo](https://media.giphy.com/media/qZQ04371ZW5Yue1XYV/giphy.gif)
